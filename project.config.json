@@ -1,6 +1,6 @@
 {
   "description": "项目配置文件",
-  "appid": "wxec5de6f425b8b4d7",
+  "appid": "touristappid",
   "compileType": "miniprogram",
   "setting": {
     "babelSetting": {
@@ -11,12 +11,21 @@
     "coverView": false,
     "postcss": false,
     "minified": false,
-    "enhance": false,
+    "enhance": true,
     "showShadowRootInWxmlPanel": false,
-    "packNpmRelationList": [],
-    "ignoreUploadUnusedFiles": true,
+    "packNpmManually": true,
+    "packNpmRelationList": [
+      {
+        "packageJsonPath": "./package.json",
+        "miniprogramNpmDistDir": "./"
+      }
+    ],
+    "ignoreUploadUnusedFiles": false,
     "compileHotReLoad": false,
-    "skylineRenderEnable": true
+    "skylineRenderEnable": true,
+    "condition": false,
+    "es6": true,
+    "ignoreDevUnusedFiles": false
   },
   "condition": {},
   "editorSetting": {

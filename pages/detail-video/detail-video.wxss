@@ -1,1 +1,34 @@
-/* pages/detail-video/detail-video.wxss */
+.video {
+    width: 100%;
+}
+.videoInfo {
+    margin: 10px;
+}
+.title {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+.intro {
+    font-size: 14px;
+    color: gray;
+    margin-bottom: 6px;
+}
+.intro .desc {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+.playCount {
+    display: flex;
+    color: gray;
+    margin-bottom: 6px;
+    font-size: 14px;
+    color: gray;
+}
+.recommend {
+    margin: 10px;
+    margin-top: 18px;
+}

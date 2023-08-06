@@ -1,0 +1,16 @@
+<!--components/video-releted-item/index.wxml-->
+<wxs src="/utils/format.wxs" module="fmt"/>
+
+<view class="item">
+  <view class="mvImg">
+    <image src="{{item.cover}}" class="image" alt="" mode="widthFix" />
+    <view class="info">
+        <view class="playCount">{{fmt.formatCount(item.playCount)}}</view>
+    </view>
+  </view>
+  <view class="info">
+    <view class="name">{{item.name}}</view>
+    <view class="artist">{{item.artistName}}</view>
+  </view>
+  
+</view>

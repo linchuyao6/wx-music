@@ -1,39 +1,30 @@
 {
-  "pages": [
-    "pages/detail-video/detail-video",
-    "pages/detail-music/detail-music"
-  ],
-  "window": {
-    "backgroundTextStyle": "dark",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "Music",
-    "navigationBarTextStyle": "black"
-  },
-  "tabBar": {
-    "list": [{
-      "pagePath": "pages/detail-music/detail-music",
-      "text": "音乐",
-      "iconPath": "assets/images/tabbar/music_normal.png",
-      "selectedIconPath": "assets/images/tabbar/music_active.png"
-    },{
-      "pagePath": "pages/detail-video/detail-video",
-      "text": "视频",
-      "iconPath": "assets/images/tabbar/video_normal.png",
-      "selectedIconPath": "assets/images/tabbar/video_active.png"
-    }
-  ]
-  },
-  "style": "v2",
-  "renderer": "skyline",
-  "rendererOptions": {
-    "skyline": {
-      "defaultDisplayBlock": true,
-      "disableABTest": true,
-      "sdkVersionBegin": "3.0.0",
-      "sdkVersionEnd": "15.255.255"
-    }
-  },
-  "componentFramework": "glass-easel",
-  "sitemapLocation": "sitemap.json",
-  "lazyCodeLoading": "requiredComponents"
+    "pages": [
+        "pages/main-video/main-video",
+        "pages/detail-video/detail-video",
+        "pages/main-music/main-music"
+    ],
+    "window": {
+        "backgroundTextStyle": "dark",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "",
+        "navigationBarTextStyle": "black"
+    },
+    "tabBar": {
+        "list": [
+            {
+                "pagePath": "pages/main-music/main-music",
+                "text": "音乐",
+                "iconPath": "assets/images/tabbar/music_normal.png",
+                "selectedIconPath": "assets/images/tabbar/music_active.png"
+            },
+            {
+                "pagePath": "pages/main-video/main-video",
+                "text": "视频",
+                "iconPath": "assets/images/tabbar/video_normal.png",
+                "selectedIconPath": "assets/images/tabbar/video_active.png"
+            }
+        ]
+    },
+    "sitemapLocation": "sitemap.json"
 }
