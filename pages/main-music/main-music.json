@@ -1,4 +1,7 @@
 {
  "navigationBarTitleText": "推荐视频",
- "enablePullDownRefresh": true
+ "enablePullDownRefresh": true,
+ "usingComponents": {
+  "van-search": "@vant/weapp/search/index"
+ }
 }

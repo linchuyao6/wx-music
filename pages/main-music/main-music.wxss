@@ -1,1 +1,12 @@
 /* pages/detail-music/detail-music.wxss */
+page {
+    --search-background-color: ;
+    --search-padding: 0 0;
+    background-color: #fafafa;
+    padding: 0 24rpx;
+}
+.van-search {
+    width: 100% !important;
+    padding-right: 40rpx !important;
+    box-sizing: content-box;
+}

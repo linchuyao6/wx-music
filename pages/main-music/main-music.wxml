@@ -1,2 +1,6 @@
-<!--pages/detail-music/detail-music.wxml-->
-<!-- <text>pages/detail-music/detail-music.wxml</text> -->
+<van-search
+    value="{{ value }}"
+    placeholder="请输入搜索关键词"
+    shape="round"
+    background="#fafafa"
+/>
