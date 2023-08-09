@@ -1,30 +1,31 @@
 {
-    "pages": [
-        "pages/main-video/main-video",
-        "pages/detail-video/detail-video",
-        "pages/main-music/main-music"
-    ],
-    "window": {
-        "backgroundTextStyle": "dark",
-        "navigationBarBackgroundColor": "#fff",
-        "navigationBarTitleText": "",
-        "navigationBarTextStyle": "black"
-    },
-    "tabBar": {
-        "list": [
-            {
-                "pagePath": "pages/main-music/main-music",
-                "text": "音乐",
-                "iconPath": "assets/images/tabbar/music_normal.png",
-                "selectedIconPath": "assets/images/tabbar/music_active.png"
-            },
-            {
-                "pagePath": "pages/main-video/main-video",
-                "text": "视频",
-                "iconPath": "assets/images/tabbar/video_normal.png",
-                "selectedIconPath": "assets/images/tabbar/video_active.png"
-            }
-        ]
-    },
-    "sitemapLocation": "sitemap.json"
+  "pages": [
+    "pages/main-video/main-video",
+    "pages/detail-video/detail-video",
+    "pages/main-music/main-music",
+    "pages/detail-music/detail-music"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/main-music/main-music",
+        "text": "音乐",
+        "iconPath": "assets/images/tabbar/music_normal.png",
+        "selectedIconPath": "assets/images/tabbar/music_active.png"
+      },
+      {
+        "pagePath": "pages/main-video/main-video",
+        "text": "视频",
+        "iconPath": "assets/images/tabbar/video_normal.png",
+        "selectedIconPath": "assets/images/tabbar/video_active.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
 }

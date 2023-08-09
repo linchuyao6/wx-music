@@ -1,7 +1,7 @@
 {
- "navigationBarTitleText": "推荐视频",
- "enablePullDownRefresh": true,
- "usingComponents": {
-  "van-search": "@vant/weapp/search/index"
- }
+    "navigationBarTitleText": "推荐视频",
+    "usingComponents": {
+        "van-search": "@vant/weapp/search/index",
+        "area-header": "/components/area-header/area-header"
+    }
 }
