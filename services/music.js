@@ -9,7 +9,7 @@ export function getMusicBanner(type = 1) {
     });
 }
 
-export function getPlayList(id) {
+export function getPlayList(id = 3779629) {
     return myRequset.get({
         url: "/playlist/detail",
         data: {
