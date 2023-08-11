@@ -36,4 +36,7 @@
             </block>
         </view>
     </view>
+    <!--热门歌单 -->
+    <menu-area title="热门歌单" menuList="{{hotMenuList}}"></menu-area>
+    <menu-area title="推荐歌单" menuList="{{recMenuList}}"></menu-area>
 </view>
