@@ -2,7 +2,7 @@
 <view class="menu">
     <area-header title="{{title}}" bind:tap="onMoreClick"> </area-header>
     <scroll-view class="list" scroll-x enable-flex style="width: 375px">
-        <block wx:for="{{menuList}}">
+        <block wx:for="{{menuList}}" wx:key="id">
             <view class="item">
                 <menu-item itemData="{{item}}"></menu-item>
             </view>

@@ -6,4 +6,12 @@ Component({
             value: {},
         },
     },
+    methods: {
+        onMenuItemTap() {
+            const id = this.properties.itemData.id;
+            wx.navigateTo({
+                url: `/pages/detail-music/detail-music?type=menu&id=${id}`,
+            });
+        },
+    },
 });

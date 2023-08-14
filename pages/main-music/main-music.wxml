@@ -25,7 +25,7 @@
         </block>
     </swiper>
     <!-- 推荐歌曲展示 -->
-    <view class="recommend">
+    <view class="recommend" wx:if="{{recommendSongs.length}}">
         <area-header
             title="推荐歌曲"
             bind:moreClick="onRecommendMoreClick"
@@ -39,4 +39,12 @@
     <!--热门歌单 -->
     <menu-area title="热门歌单" menuList="{{hotMenuList}}"></menu-area>
     <menu-area title="推荐歌单" menuList="{{recMenuList}}"></menu-area>
+
+    <!-- 巅峰榜 -->
+    <view class="ranking" wx:if="{{isRankingData}}">
+        <area-header title="巅峰榜" hasMore="{{false}}"></area-header>
+        <view class="ranking-list" wx:for="{{rankingInfos}}" wx:key="id">
+            <ranking-item itemData="{{item}}" key="{{index}}"></ranking-item>
+        </view>
+    </view>
 </view>
