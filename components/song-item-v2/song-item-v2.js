@@ -10,4 +10,12 @@ Component({
             value: -1,
         },
     },
+    methods:{
+        onSongItemTap(){
+            const {id}=this.properties.itemData
+            wx.navigateTo({
+              url: `/pages/music-player/music-player?id=${id}`,
+            })
+        }
+    }
 });

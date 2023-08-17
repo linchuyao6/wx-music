@@ -7,6 +7,11 @@ Component({
         },
     },
     methods: {
-        clicMore() {},
+        onSongItemTap() {
+            const {id}=this.properties.itemData
+            wx.navigateTo({
+              url: `/pages/music-player/music-player?id=${id}`,
+            })
+        },
     },
 });

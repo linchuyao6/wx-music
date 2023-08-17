@@ -1,0 +1,7 @@
+<!--pages/music-player/music-player.wxml-->
+
+<image class="bg-image" src="{{currentSong.al.picUrl}}" mode="aspectFill" alt=""/>
+<view class="bg-cover"></view>
+
+<!-- 自定义导航栏 -->
+<nav-bar></nav-bar>
