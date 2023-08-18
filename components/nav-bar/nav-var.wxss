@@ -1,1 +1,33 @@
-/* components/nav-bar/nav-var.wxss */
+.nav {
+    display: flex;
+    height: 44px;
+    color: #ffffff;
+}
+
+.left,
+.center,
+.right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.nav .left,
+.nav .right {
+    width: 120rpx;
+}
+.center {
+    flex: 1;
+}
+
+.left .icon {
+    width: 40rpx;
+    height: 40rpx;
+}
+
+.default {
+    display: none;
+}
+
+.slot:empty + .default {
+    display: flex;
+}

@@ -1,23 +1,27 @@
 // components/nav-bar/nav-var.js
+const app = getApp();
+
 Component({
-  /**
-   * 组件的属性列表
-   */
-  properties: {
-
-  },
-
-  /**
-   * 组件的初始数据
-   */
-  data: {
-
-  },
-
-  /**
-   * 组件的方法列表
-   */
-  methods: {
-
-  }
-})
+    options: {
+        multipleSlots: true,
+    },
+    properties: {
+        title: {
+            type: String,
+            value: "导航标题",
+        },
+    },
+    data: {
+        statusheight: 20,
+    },
+    lifetimes: {
+        attached() {
+            this.setData({ statusheight: app.globalData.statusheight });
+        },
+    },
+    methods: {
+        onLeftClick() {
+            this.triggerEvent("leftclick");
+        },
+    },
+});
