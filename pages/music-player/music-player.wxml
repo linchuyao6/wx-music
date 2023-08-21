@@ -1,5 +1,5 @@
 <!--pages/music-player/music-player.wxml-->
-
+<wxs src="/utils/format.wxs" module="fmt" />
 <image
     class="bg-image"
     src="{{currentSong.al.picUrl}}"
@@ -46,23 +46,40 @@
         </view>
         <view class="oneLyric"> cbajscnjaksckj</view>
         <view class="progress">
-            <slider class="slider" block-size="12"> </slider>
+            <slider
+                class="slider"
+                block-size="12"
+                value="{{sliderValue}}"
+                bindchange="onSliderChange"
+                bindchanging="onSliderChanging"
+            >
+            </slider>
             <view class="time">
-                <view class="current">00:00</view>
-                <view class="duration">12:00</view>
+                <view class="current">{{fmt.formatTime(currentTime)}}</view>
+                <view class="duration">{{fmt.formatTime(durationTime)}}</view>
             </view>
         </view>
         <view class="controls">
             <image
                 src="/assets/images/player/play_order.png"
                 class="btn mode"
+                bind:tap="onModelBtnTap"
             />
-            <image src="/assets/images/player/play_prev.png" class="btn prev" />
             <image
-                src="/assets/images/player/play_resume.png"
-                class="btn play"
+                src="/assets/images/player/play_prev.png"
+                class="btn prev"
+                bind:tap="onPrevBtnTap"
             />
-            <image src="/assets/images/player/play_next.png" class="btn next" />
+            <image
+                src="/assets/images/player/play_{{isPlaying?'pause':'resume'}}.png"
+                class="btn play"
+                bind:tap="onPlayOrPauseTap"
+            />
+            <image
+                src="/assets/images/player/play_next.png"
+                class="btn next"
+                bind:tap="onNextBtnTap"
+            />
             <image
                 src="/assets/images/player/play_music.png"
                 class="btn list"
