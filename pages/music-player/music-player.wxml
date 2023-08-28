@@ -44,7 +44,7 @@
             <view class="name">{{currentSong.name}}</view>
             <view class="singer">{{currentSong.ar[0].name}}</view>
         </view>
-        <view class="oneLyric"> cbajscnjaksckj</view>
+        <view class="oneLyric"> {{currentLyricText}}</view>
         <view class="progress">
             <slider
                 class="slider"

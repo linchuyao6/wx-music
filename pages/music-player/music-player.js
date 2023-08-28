@@ -2,6 +2,7 @@
 const app = getApp();
 import { getMusicDetail, getSongLyric } from "../../services/player";
 import throttle from "../../utils/throttle";
+import parseLyric from "../../utils/parseLyric";
 
 // 创建播放器
 const audioContext = wx.createInnerAudioContext();
@@ -20,6 +21,10 @@ Page({
         isSliderChanging: false,
 
         isPlaying: false,
+        // 歌词部分
+        lyricInfos: [],
+        currentLyricText: "",
+        currentLyricIndex: -1,
     },
     onLoad(options) {
         this.setData({ contentHeight: app.globalData.contentHeight });
@@ -28,6 +33,7 @@ Page({
 
         //  发送网络请求
         this.fetchMusicDetail(id);
+        this.fetchSongLyric(id);
         this.setupPlaySong(id);
     },
     // 播放歌曲
@@ -55,9 +61,26 @@ Page({
             audioContext.onCanplay(() => {
                 audioContext.play();
             });
+            // 匹配正确的歌词
+            if (!this.data.lyricInfos.length) return;
+            let index = this.data.lyricInfos.length - 1;
+            for (let i = 0; i < this.data.lyricInfos.length; i++) {
+                const info = this.data.lyricInfos[i];
+                if (info.time > audioContext.currentTime * 1000) {
+                    index = i - 1;
+                    break;
+                }
+            }
+
+            if (index === this.data.currentLyricIndex) return;
+
+            const currentLyricText = this.data.lyricInfos[index].text;
+            this.setData({
+                currentLyricText,
+                currentLyricIndex: index,
+            });
         });
     },
-
     // 点击事件
     onNavBackTap() {
         wx.navigateBack();
@@ -104,6 +127,13 @@ Page({
                 currentSong: res.songs[0],
                 durationTime: res.songs[0].dt,
             });
+        });
+    },
+    fetchSongLyric(id) {
+        getSongLyric(id).then((res) => {
+            const lryString = res.lrc.lyric;
+            const lyricInfos = parseLyric(lryString);
+            this.setData({ lyricInfos });
         });
     },
 });
