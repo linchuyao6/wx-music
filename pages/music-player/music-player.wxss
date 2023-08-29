@@ -89,3 +89,24 @@
     width: 140rpx;
     height: 140rpx;
 }
+/* 歌词样式 */
+.lyric-list {
+    color: #aaa;
+    font-size: 28rpx;
+    text-align: center;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 40rpx;
+}
+.lyric-list ::-webkit-scrollbar {
+    display: none;
+}
+.lyric-list .item {
+    height: 70rpx;
+    line-height: 70prx;
+}
+.lyric-list .item.active {
+    color: plum;
+    font-size: 40rpx;
+    height: 140rpx;
+}

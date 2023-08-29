@@ -1,5 +1,6 @@
 import recommendStore from "../../store/recommendStore";
 import rankingStore from "../../store/rankingStore";
+import playerStore from "../../store/playStore";
 import { getPlayList } from "../../services/music";
 
 Page({
@@ -30,7 +31,11 @@ Page({
         const res = await getPlayList(this.data.id);
         this.setData({ songInfo: res.playlist });
     },
-
+    onSongItemTap(event) {
+        const index = event.currentTarget.dataset.index;
+        playerStore.setState("playSongList", this.data.songInfo.tracks);
+        playerStore.setState("playSongIndex", index);
+    },
     handleRanking(value) {
         this.setData({ songInfo: value });
         wx.setNavigationBarTitle({

@@ -1,8 +1,10 @@
 // pages/music-player/music-player.js
 const app = getApp();
 import { getMusicDetail, getSongLyric } from "../../services/player";
+import playStore from "../../store/playStore";
 import throttle from "../../utils/throttle";
 import parseLyric from "../../utils/parseLyric";
+import playerStore from "../../store/playStore";
 
 // 创建播放器
 const audioContext = wx.createInnerAudioContext();
@@ -12,6 +14,10 @@ Page({
         currentPage: 0,
         contentHeight: 0,
 
+        playSongList: [],
+        playSongIndex: 0,
+        isFirstPlay: true,
+
         id: 0,
         currentSong: {},
         currentTime: 0,
@@ -20,20 +26,26 @@ Page({
         isWaiting: false,
         isSliderChanging: false,
 
-        isPlaying: false,
+        isPlaying: true,
         // 歌词部分
         lyricInfos: [],
         currentLyricText: "",
         currentLyricIndex: -1,
+        lyricScrollTop: 0,
     },
     onLoad(options) {
-        this.setData({ contentHeight: app.globalData.contentHeight });
+        this.setData({
+            contentHeight: app.globalData.contentHeight,
+        });
         const { id } = options;
         this.setData({ id });
+        // 共享数据
+        playerStore.onStates(
+            ["playSongList", "playSongIndex"],
+            this.getPlaySongInfosHandler
+        );
 
         //  发送网络请求
-        this.fetchMusicDetail(id);
-        this.fetchSongLyric(id);
         this.setupPlaySong(id);
     },
     // 播放歌曲
@@ -42,9 +54,23 @@ Page({
         setTimeout(() => {
             this.data.isWaiting = false;
         }, 1000);
+        // 获取音乐信息
+        getMusicDetail(id).then((res) => {
+            this.setData({
+                currentSong: res.songs[0],
+                durationTime: res.songs[0].dt,
+            });
+        });
+        // 获取歌词信息
+        getSongLyric(id).then((res) => {
+            const lryString = res.lrc.lyric;
+            const lyricInfos = parseLyric(lryString);
+            this.setData({ lyricInfos });
+        });
         // 播放当前歌曲
-        audioContext.stop();
         audioContext.src = `https://music.163.com/song/media/outer/url?id=${id}.mp3`;
+        audioContext.stop();
+        audioContext.autoplay = true;
 
         audioContext.onTimeUpdate(() => {
             if (this.data.isSliderChanging || this.data.isWaiting) return;
@@ -78,6 +104,7 @@ Page({
             this.setData({
                 currentLyricText,
                 currentLyricIndex: index,
+                lyricScrollTop: index * 35,
             });
         });
     },
@@ -120,20 +147,47 @@ Page({
         const currentTime = (value / 100) * this.data.durationTime;
         this.setData({ currentTime });
     }, 100),
-    // 发送网络请求
-    fetchMusicDetail(id) {
-        getMusicDetail(id).then((res) => {
-            this.setData({
-                currentSong: res.songs[0],
-                durationTime: res.songs[0].dt,
-            });
-        });
+    onNextBtnTap() {
+        this.changeNewSongs(false);
     },
-    fetchSongLyric(id) {
-        getSongLyric(id).then((res) => {
-            const lryString = res.lrc.lyric;
-            const lyricInfos = parseLyric(lryString);
-            this.setData({ lyricInfos });
+    onPrevBtnTap() {
+        this.changeNewSongs();
+    },
+    changeNewSongs(isNext = true) {
+        const length = this.data.playSongList.length;
+        let index = this.data.playSongIndex;
+
+        index = isNext ? index + 1 : index - 1;
+        if (index === length) index = 0;
+        if (index === -1) index = length - 1;
+        const newSongs = this.data.playSongList[index];
+        this.setData({
+            currentSong: {},
+            sliderValue: 0,
+            currentTime: 0,
+            durationTime: 0,
+            currentLyricText: "",
+            lyricInfos: [],
         });
+        this.setupPlaySong(newSongs.id);
+        playerStore.setState("playSongIndex", index);
+    },
+    // 发送网络请求
+
+    // store共享数据
+    getPlaySongInfosHandler({ playSongList, playSongIndex }) {
+        if (playSongList) {
+            this.setData({ playSongList });
+        }
+        if (playSongIndex !== undefined) {
+            this.setData({ playSongIndex });
+        }
+    },
+
+    onUnload() {
+        playerStore.offStates(
+            ["playSongList", "playSongIndex"],
+            this.getPlaySongInfosHandler
+        );
     },
 });

@@ -3,6 +3,7 @@ import { getMusicBanner, getSongMenuList } from "../../services/music";
 import querySelect from "../../utils/query-select";
 import recommendSongs from "../../store/recommendStore";
 import rankingStore from "../../store/rankingStore";
+import playerStore from "../../store/playStore";
 import throttle from "../../utils/throttle";
 import recommendStore from "../../store/recommendStore";
 
@@ -74,37 +75,17 @@ Page({
             url: "/pages/detail-music/detail-music?type=recommend",
         });
     },
+    onSongItemTap(event) {
+        const index = event.currentTarget.dataset.index;
+        playerStore.setState("playSongList", this.data.recommendSongs);
+        playerStore.setState("playSongIndex", index);
+    },
 
     // 从store中获取数据
     handleRecommendSongs(value) {
         if (!value.tracks) return;
         this.setData({ recommendSongs: value.tracks.slice(0, 6) });
     },
-    // 获取飙升榜
-    // handleNewRanking(value) {
-    //     if (!value.name) return;
-    //     const newRankingInfo = { ...this.data.rankingInfos, newRanking: value };
-    //     this.setData({ rankingInfos: newRankingInfo });
-    //     console.log(this.data.rankingInfos);
-    // },
-    // // 获取原创榜
-    // handleOriginRanking(value) {
-    //     if (!value.name) return;
-    //     const newRankingInfo = {
-    //         ...this.data.rankingInfos,
-    //         originRanking: value,
-    //     };
-    //     this.setData({ rankingInfos: newRankingInfo });
-    // },
-    // // 获取新歌榜
-    // handleUpRanking(value) {
-    //     if (!value.name) return;
-    //     const newRankingInfo = {
-    //         ...this.data.rankingInfos,
-    //         upRanking: value,
-    //     };
-    //     this.setData({ rankingInfos: newRankingInfo });
-    // },
     // 获取榜单数据
     getRankingInfos(ranking) {
         return (value) => {
