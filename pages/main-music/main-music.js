@@ -23,6 +23,9 @@ Page({
         // 巅峰榜数据
         isRankingData: false,
         rankingInfos: {},
+        // 当前正在播放的歌曲信息
+        currentSong: {},
+        isPlaying: false,
     },
     onLoad() {
         this.fetchMusicBanner();
@@ -37,6 +40,7 @@ Page({
             this.getRankingInfos("originRanking")
         );
         rankingStore.onState("newRanking", this.getRankingInfos("newRanking"));
+        playerStore.onStates(["currentSong", "isPlaying"], this.hanlePlayInfos);
     },
 
     // 发送网络请求
@@ -80,11 +84,27 @@ Page({
         playerStore.setState("playSongList", this.data.recommendSongs);
         playerStore.setState("playSongIndex", index);
     },
+    onPlayOrPauseBtnTap() {
+        playerStore.dispatch("changeMusicStatusAction");
+    },
+    onPlayBarAlbumTap() {
+        wx.navigateTo({
+            url: "/pages/music-player/music-player",
+        });
+    },
 
     // 从store中获取数据
     handleRecommendSongs(value) {
         if (!value.tracks) return;
         this.setData({ recommendSongs: value.tracks.slice(0, 6) });
+    },
+    hanlePlayInfos({ currentSong, isPlaying }) {
+        if (currentSong) {
+            this.setData({ currentSong });
+        }
+        if (isPlaying !== undefined) {
+            this.setData({ isPlaying });
+        }
     },
     // 获取榜单数据
     getRankingInfos(ranking) {

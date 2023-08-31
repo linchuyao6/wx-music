@@ -8,7 +8,7 @@
         <song-item-v2
             itemData="{{item}}"
             bind:tap="onSongItemTap"
-            data-index="{{index+1}}"
+            data-index="{{index}}"
             index="{{index+1}}"
         ></song-item-v2>
     </block>

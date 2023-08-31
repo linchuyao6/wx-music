@@ -61,7 +61,7 @@
         </view>
         <view class="controls">
             <image
-                src="/assets/images/player/play_order.png"
+                src="/assets/images/player/play_{{playModeName}}.png"
                 class="btn mode"
                 bind:tap="onModelBtnTap"
             />
